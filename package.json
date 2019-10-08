@@ -1,0 +1,23 @@
+{
+  "name": "cs157a-team-29",
+  "version": "1.0.0",
+  "description": "Package requirements for SQL project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CS157A-Team-29/CS157A-Team-29.git"
+  },
+  "author": "Jan Rodriguez, Aaron Smith, Rabia Mohiuddin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CS157A-Team-29/CS157A-Team-29/issues"
+  },
+  "homepage": "https://github.com/CS157A-Team-29/CS157A-Team-29#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sql": "^0.78.0"
+  }
+}
