@@ -1,0 +1,9 @@
+<% include ./partials/header %>
+<% rows.forEach(function(RowData){ %>
+    <h3>ACCOUNT DATA</h3>
+    <span> <b>Username</b> is: <%= RowData.username %> </span><br>
+    <span> <b>Email</b> is:<%=RowData.email%></span><br>
+    <span> <b>Password</b> is:<%=RowData.password%></span><br>
+<%})%>
+
+<% include ./partials/footer %>

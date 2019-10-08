@@ -1,0 +1,9 @@
+<% include ./partials/header %>
+<% rows.forEach(function(RowData){ %>
+    <h3>FLASHCARD DATA</h3>
+    <span> <b>cardID</b> is: <%= RowData.cardID %> </span><br>
+    <span> <b>terms</b> is:<%=RowData.terms%></span><br>
+    <span> <b>definitions</b> is:<%=RowData.definitions%></span><br>
+<%})%>
+
+<% include ./partials/footer %>
