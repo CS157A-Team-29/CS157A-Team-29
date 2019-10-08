@@ -18,6 +18,6 @@
   "homepage": "https://github.com/CS157A-Team-29/CS157A-Team-29#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "sql": "^0.78.0"
+    "mysql": "^2.17.1"
   }
 }
