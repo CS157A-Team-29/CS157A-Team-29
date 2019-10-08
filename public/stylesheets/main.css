@@ -1,0 +1,208 @@
+/*
+Icon for dude in header image made by Freepik on flaticon.com
+*/
+
+
+.navbar{
+    background-color: #8baae8;
+    min-height: 100px;
+    height: auto;
+}
+.nav-icon{
+
+    margin-left: 60px;
+    width: 3%;
+    min-width: 41px;
+}
+.navbar-nav{
+    margin-left: 40px;
+}
+p{
+    font-family: 'Saira', sans-serif;
+}
+.wrapper{
+
+    background-color:#f2f2f2;
+}
+
+.Banner{
+    height: 700px;
+    max-height: 100%;
+
+}
+
+.dude-icon{
+    display: block;
+    margin: 0px auto;
+
+    height: 33%;
+    max-height: 240px;
+    max-width:10%;
+    border-radius: 30%;
+    padding-top: 80px;
+
+}
+.Header-text{
+    font-size: 70px;
+    max-width: 600px;
+    width: 80%;
+    margin: 0px auto;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 15px;
+
+}
+.Banner-text{
+    font-size: 19px;
+    max-width: 600px;
+    width: 80%;
+    margin: 0px auto;
+    text-align: center;
+    padding-bottom: 40px;
+    padding-top: 15px;
+
+}
+.Hobbies{
+    margin: 50px auto;
+    height:auto;
+    min-height: 700px;
+
+}
+
+.Hobbies-Header{
+    font-size: 50px;
+    max-width: 600px;
+    width: 80%;
+    margin: 0px auto;
+    text-align: center;
+    font-weight: bold;
+}
+.Hobbies-row{
+    margin: 50px auto;
+
+}
+.Hobbies-text{
+    margin: 20px auto;
+    font-size: 18px;
+}
+
+.Hobby-image{
+    width: 100%;
+    border-radius:5%;
+}
+
+.Quote{
+    height: 700px;
+    padding-top: 225px;
+    text-align: center;
+    font-size: 55px;
+    background-color: #8baae8;
+}
+.Values{
+    height:auto;
+    min-height:700px;
+    max-width: 990px;
+    width: 80%;
+    margin: 50px auto;
+
+}
+
+
+.Values-content{
+    height:auto;
+    margin: 50px auto;
+    column-gap: 15px;
+
+}
+
+.Values-img{
+    width: 100%;
+    border-radius:5%;
+    max-height: 200px;
+}
+.Values-Header{
+    font-size: 50px;
+    max-width: 600px;
+    width: 80%;
+    margin: 0px auto;
+    padding-top: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+.Value-category{
+    font-family: 'Saira', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+}
+.Value-text{
+    font-size: 18px;
+}
+
+.header{
+    margin-top: 40px;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.blog-header{
+    margin-top: 40px;
+    font-weight: bold;
+    font-size: 40px;
+
+}
+.index-container{
+    margin-bottom: 100px;
+}
+
+.show-container{
+    margin-bottom: 100px;
+}
+.show-description{
+    font-size: 20px;
+    font-family: 'Saira', sans-serif;
+}
+
+.nav-item{
+    font-size: 20px;
+}
+
+.contact-info-container{
+    width: 50%;
+    margin: 100px auto;
+}
+
+.contact-info-template{
+    text-align: left;
+    font-family: 'Saira', sans-serif;
+    margin: 20px auto;
+}
+
+.fa {
+
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.contact-info{
+    font-size: 30px;
+}
+
+.link{
+    color: inherit;
+    text-decoration:none;
+    font-family: 'Saira', sans-serif;
+}
+
+.content{
+    font-family: 'Saira', sans-serif;
+}
+.header{
+    font-family: 'Saira', sans-serif;
+}
+
+a{
+    font-family: 'Saira', sans-serif;
+}

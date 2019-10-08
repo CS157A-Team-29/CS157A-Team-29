@@ -3,6 +3,7 @@ var mysql = require('mysql');
 var app = express();
 
 app.set("view engine", "ejs");
+app.use(express.static("public"));
 var connection = mysql.createConnection({
   host:'localhost',
   user:'root',
@@ -20,14 +21,13 @@ connection.connect(function(error){
 });
 
 app.get('/',function(req,res){
-  connection.query("select * from emp", function(error,rows,fields){
+  connection.query("select * from emp", function(error,result){
     if(!!error){
       console.log('Error in query');
     }
     else{
-      console.log('Connection Successful');
-      console.log(rows)
-      console.log(fields)
+      res.render("landing",{rows:result});
+      console.log(result);
     }
   });
 });
