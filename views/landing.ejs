@@ -1,9 +1,9 @@
 <% include ./partials/header %>
 <% rows.forEach(function(RowData){ %>
-  <h4> ID is <%= RowData.id %> </h4>
-  <h4> Name is:<%=RowData.name%></h4>
-  <h4> Age is:<%=RowData.age%></h4>
-
+    <h3>USER DATA</h3>
+    <span> <b>ID</b> is: <%= RowData.id %> </span><br>
+    <span> <b>Name</b> is:<%=RowData.name%></span><br>
+    <span> <b>Age</b> is:<%=RowData.age%></span><br>
 <%})%>
 
 <% include ./partials/footer %>
