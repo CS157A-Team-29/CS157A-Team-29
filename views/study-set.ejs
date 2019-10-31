@@ -2,8 +2,9 @@
 <% rows.forEach(function(RowData){ %>
     <h3>STUDYSET DATA</h3>
     <span> <b>SetID</b> is: <%= RowData.setID %> </span><br>
+    <span> <b>Owner</b> is:<%=RowData.owner%></span><br>
     <span> <b>Permissions</b> is:<%=RowData.permissions%></span><br>
-    <span> <b>Title</b> is:<%=RowData.title%></span><br>
+    <span> <b>Title</b> is:<%=RowData.Title%></span><br>
 <%})%>
 
 <% include ./partials/footer %>
