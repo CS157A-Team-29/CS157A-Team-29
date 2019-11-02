@@ -1,29 +1,47 @@
-var express = require("express");
-var mysql = require("mysql");
-var app = express();
+let express = require("express");
+let mysql = require("mysql");
+let path = require("path");
+let bodyParser = require("body-parser"); // body-parser for handling post requests
+let app = express();
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-var connection = mysql.createConnection({
+app.use("/public/images/", express.static("./public/images"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
+
+let database = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "M0hiuddin", //Enter your password
-  database: "cs157a" //Enter the name of your database
+  database: "cs157a", // Enter the name of your database
+  password: "MyNewPass" // Enter your password
 });
 
-app.use("/public/images/", express.static("./public/images"));
-
-connection.connect(function(error) {
-  if (!!error) {
-    console.log(error);
+database.connect(function(error) {
+  if (error) {
+ 	console.log(error);
   } else {
-    console.log("Connected");
+	console.log("Connected to database");
   }
 });
 
+// Load login/signup page
 app.get("/", function(req, res) {
-  connection.query("select * from Accounts", function(error, result) {
-    if (!!error) {
+  res.sendFile(path.join(__dirname, "./public/html/login.html"));
+});
+
+app.post("/login", function(req, res) {
+  console.log(req.body.username + " logging in");
+});
+
+app.post("/signup", function(req, res) {
+  console.log(req.body.username + " signing up");
+});
+
+// Load landing page
+app.get("/landing", function(req, res) {
+  database.query("select * from Accounts", function(error, result) {
+    if (error) {
       console.log("Error in query");
     } else {
       res.render("landing", { rows: result });
@@ -33,8 +51,8 @@ app.get("/", function(req, res) {
 });
 
 app.get("/accounts", function(req, res) {
-  connection.query("select * from Accounts", function(error, result) {
-    if (!!error) {
+  database.query("select * from Accounts", function(error, result) {
+    if (error) {
       console.log("Error in query");
     } else {
       res.render("accounts", { rows: result });
@@ -44,8 +62,8 @@ app.get("/accounts", function(req, res) {
 });
 
 app.get("/studyset", function(req, res) {
-  connection.query("select * from StudySet", function(error, result) {
-    if (!!error) {
+  database.query("select * from StudySet", function(error, result) {
+    if (error) {
       console.log("Error in query");
     } else {
       res.render("study-set", { rows: result });
@@ -55,8 +73,8 @@ app.get("/studyset", function(req, res) {
 });
 
 app.get("/folders", function(req, res) {
-  connection.query("select * from Folders", function(error, result) {
-    if (!!error) {
+  database.query("select * from Folders", function(error, result) {
+    if (error) {
       console.log("Error in query");
     } else {
       res.render("folders", { rows: result });
@@ -66,8 +84,8 @@ app.get("/folders", function(req, res) {
 });
 
 app.get("/flashcards", function(req, res) {
-  connection.query("select * from Flashcard", function(error, result) {
-    if (!!error) {
+  database.query("select * from Flashcard", function(error, result) {
+    if (error) {
       console.log("Error in query");
     } else {
       res.render("flashcards", { rows: result });
@@ -76,4 +94,8 @@ app.get("/flashcards", function(req, res) {
   });
 });
 
-app.listen(1337);
+
+let port = 1337;
+app.listen(port, function() {
+  console.log("Listening on port " + port);
+});
