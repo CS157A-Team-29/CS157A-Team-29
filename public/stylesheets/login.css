@@ -1,13 +1,18 @@
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
-  background-color: #98AFC7;
+  background-color: #98AFC7 !important;
+}
+
+body, html {
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #welcomeText {
   text-align: center;
   font-family: "Comic Sans MS";
-  color: white;
+  color: black;
   margin-top: 7%;
 }
 
@@ -173,12 +178,6 @@ input[type=password]:placeholder {
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
   animation-delay: 1s;
-}
-
-.fadeIn.fifth {
-  -webkit-animation-delay: 1.2s;
-  -moz-animation-delay: 1.2s;
-  animation-delay: 1.2s;
 }
 
 /* Simple CSS3 Fade-in Animation */
