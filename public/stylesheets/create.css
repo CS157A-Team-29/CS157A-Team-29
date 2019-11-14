@@ -1,0 +1,29 @@
+body {
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  background-color: #98afc7 !important;
+}
+
+body,
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.pt-3-half {
+  padding-top: 1.4rem;
+}
+
+.card {
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  margin-top: -12%;
+}
