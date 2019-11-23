@@ -7,7 +7,7 @@ const newTr = `
   <td class="pt-3-half" contenteditable="true">Example</td>
   <td class="pt-3-half" contenteditable="true">Example</td>
   <td>
-    <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">Remove</button></span>
+    <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 glyphicon glyphicon-trash waves-effect waves-light"></button></span>
   </td>
 </tr>`;
 
