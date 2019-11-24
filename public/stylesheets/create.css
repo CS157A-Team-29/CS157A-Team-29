@@ -16,9 +16,8 @@ html {
 
 .card {
   text-align: center;
-  overflow-y: visible;
   position: absolute;
-  top: 10%;
+  top: 8%;
 }
 
 .wrapper {
