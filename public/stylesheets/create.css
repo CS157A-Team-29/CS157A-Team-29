@@ -16,6 +16,9 @@ html {
 
 .card {
   text-align: center;
+  overflow-y: visible;
+  position: absolute;
+  top: 10%;
 }
 
 .wrapper {
@@ -26,4 +29,9 @@ html {
   width: 100%;
   min-height: 100%;
   margin-top: -12%;
+}
+
+text-success {
+  position: absolute;
+  bottom: 5%;
 }
