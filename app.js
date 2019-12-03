@@ -9,21 +9,21 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use("/public/images/", express.static("./public/images"));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 let database = mysql.createConnection({
   host: "localhost",
   user: "root",
   database: "cs157a", // Enter the name of your database
-  password: "testPass" // Enter your password
+  password: "M0hiuddin" // Enter your password
 });
 
 database.connect(function(error) {
   if (error) {
-	console.log("Error connecting to database");
- 	console.log(error);
+    console.log("Error connecting to database");
+    console.log(error);
   } else {
-	console.log("Connected to database");
+    console.log("Connected to database");
   }
 });
 
@@ -32,55 +32,102 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "./public/html/login.html"));
 });
 
+// Load login/signup page by default
+app.get("/create", function(req, res) {
+  res.sendFile(path.join(__dirname, "./public/html/createSet.html"));
+});
+
+app.post("/createStudySet", function(req, res) {
+  let checkQuery =
+    'SELECT * FROM studyset WHERE setID = "' + req.body.setID + '";';
+
+  database.query(checkQuery, function(error, result) {
+    if (error) {
+      console.log("Error in check studyset query");
+      console.log(error);
+    } else {
+      let query =
+        'INSERT INTO studyset (setID, Title, permissions, owner) VALUES("' +
+        req.body.setID +
+        '","' +
+        req.body.setName +
+        '","' +
+        "public" +
+        '","' +
+        "aaronsmith" +
+        '");';
+      database.query(query, function(error, result) {
+        if (error) {
+          console.log("Error in insert create query");
+          console.log(error);
+        } else {
+          res.send("valid");
+        }
+      });
+    }
+  });
+});
+
 // Login to the platform. Check database for valid username and password.
 app.post("/login", function(req, res) {
-  let query = "SELECT * FROM accounts WHERE username = \"" + req.body.username + "\";";
-  			//+ "\" AND password = \"" + passwordHash.generate(req.body.password) + "\"";
+  let query =
+    'SELECT * FROM accounts WHERE username = "' + req.body.username + '";';
+  //+ "\" AND password = \"" + passwordHash.generate(req.body.password) + "\"";
   database.query(query, function(error, result) {
-	if (error) {
+    if (error) {
       console.log("Error in login query");
     } else {
-	   if (result.length === 1 && passwordHash.verify(req.body.password, result[0].password)) {
-		 // If this is true, then our query returned a row in the database, i.e. the username/password combination is correct.
-		 console.log("Logging in as " + req.body.username);
-		 res.send("valid");
-	   } else {
-		 // Else username/password combination not in the database.
-		 res.send("invalid");
-	   }
+      if (
+        result.length === 1 &&
+        passwordHash.verify(req.body.password, result[0].password)
+      ) {
+        // If this is true, then our query returned a row in the database, i.e. the username/password combination is correct.
+        console.log("Logging in as " + req.body.username);
+        res.send("valid");
+      } else {
+        // Else username/password combination not in the database.
+        res.send("invalid");
+      }
     }
   });
 });
 
 // Sign up for the platform. Check data and database so that a valid account can be created.
 app.post("/signup", function(req, res) {
-  let query = "INSERT INTO accounts (username, email, password) VALUES(\"" + req.body.username + "\",\""
-  			+ req.body.email + "\",\"" + passwordHash.generate(req.body.password) + "\");";
+  let query =
+    'INSERT INTO accounts (username, email, password) VALUES("' +
+    req.body.username +
+    '","' +
+    req.body.email +
+    '","' +
+    passwordHash.generate(req.body.password) +
+    '");';
   database.query(query, function(error, result) {
-  	if (error) {
+    if (error) {
       console.log("Error in signup query");
-	  console.log(error);
+      console.log(error);
     } else {
-	  res.send("valid");
+      res.send("valid");
     }
   });
 });
 
 // Checks if the username is in the database. If it isn't, returns "valid" to the client.
 app.post("/checkIfUsernameValid", function(req, res) {
-  let query = "SELECT * FROM accounts WHERE username = \"" + req.body.username + "\";";
+  let query =
+    'SELECT * FROM accounts WHERE username = "' + req.body.username + '";';
   database.query(query, function(error, result) {
     if (error) {
       console.log("Error in checkIfUsernameValid query");
-	} else {
-	  if (result.length === 1) {
-	    // If this is true, then our query returned a row in the database
-	    res.send("invalid");
-	  } else {
-		// Else username not in the database
-		res.send("valid");
-	  }
-	}
+    } else {
+      if (result.length === 1) {
+        // If this is true, then our query returned a row in the database
+        res.send("invalid");
+      } else {
+        // Else username not in the database
+        res.send("valid");
+      }
+    }
   });
 });
 
@@ -141,7 +188,10 @@ app.get("/flashcards", function(req, res) {
 });
 
 app.get("/practice-test", function(req, res) {
-  database.query("SELECT * FROM Flashcard ORDER BY RAND()", function(error, result) {
+  database.query("SELECT * FROM Flashcard ORDER BY RAND()", function(
+    error,
+    result
+  ) {
     if (error) {
       console.log("Error in query");
     } else {
@@ -172,7 +222,6 @@ app.get("/contributes", function(req, res) {
     }
   });
 });
-
 
 let port = 1337;
 app.listen(port, function() {

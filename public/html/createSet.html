@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/create.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap 3 needed for icons -->
+    <title>New Study Set</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- Editable table -->
+      <div class="card">
+        <h3
+          class="card-header text-center font-weight-bold text-uppercase py-4"
+        >
+          New Study Set
+        </h3>
+        <div id="tableName">
+          Name: <input type="text" id="studySetName">
+        </div>
+        <div class="card-body">
+          <div id="table" class="table-editable">
+            <table
+              id="termsDefs"
+            class="table table-bordered table-responsive-md table-striped text-center"
+            >
+              <thead>
+                <tr>
+                  <th class="text-center">Term</th>
+                  <th class="text-center">Definition</th>
+                  <th class="text-center">Remove</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td
+                    class="pt-3-half"
+                    contenteditable="true"
+                    placeholder="term"
+                  ></td>
+                  <td
+                    class="pt-3-half"
+                    contenteditable="true"
+                    placeholder="definition"
+                  ></td>
+                  <td>
+                    <span class="table-remove"
+                      ><button
+                        type="button"
+                        class="btn btn-danger btn-rounded btn-sm my-0 glyphicon glyphicon-trash"
+                      ></button
+                    ></span>
+                  </td>
+                </tr>
+                <!-- This is our clonable table line -->
+                <tr>
+                  <td
+                    class="pt-3-half"
+                    contenteditable="true"
+                    placeholder="term"
+                  ></td>
+                  <td
+                    class="pt-3-half"
+                    contenteditable="true"
+                    placeholder="definition"
+                  ></td>
+                  <td>
+                    <span class="table-remove"
+                      ><button
+                        type="button"
+                        class="btn btn-danger btn-rounded btn-sm my-0 glyphicon glyphicon-trash"
+                      ></button
+                    ></span>
+                  </td>
+                </tr>
+                <!-- This is our clonable table line -->
+                <tr>
+                  <td
+                    class="pt-3-half"
+                    contenteditable="true"
+                    placeholder="term"
+                  ></td>
+                  <td
+                    class="pt-3-half"
+                    contenteditable="true"
+                    placeholder="definition"
+                  ></td>
+                  <td>
+                    <span class="table-remove"
+                      ><button
+                        type="button"
+                        class="btn btn-danger btn-rounded btn-sm my-0 glyphicon glyphicon-trash"
+                      ></button
+                    ></span>
+                  </td>
+                </tr>
+                <!-- This is our clonable table line -->
+                <tr class="hide">
+                  <td
+                    class="pt-3-half"
+                    contenteditable="true"
+                    placeholder="term"
+                  ></td>
+                  <td
+                    class="pt-3-half"
+                    contenteditable="true"
+                    placeholder="definition"
+                  ></td>
+                  <td>
+                    <span class="table-remove"
+                      ><button
+                        type="button"
+                        class="btn btn-danger btn-rounded btn-sm my-0 glyphicon glyphicon-trash"
+                      ></button
+                    ></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <span class="table-add float-right mb-3 mr-2"
+          ><a href="#!" class="text-success"
+            ><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a
+        ></span>
+        <span class="save-data"
+          ><button
+            type="button"
+            class="btn btn-primary btn-rounded btn-sm my-0 glyphicon glyphicon-floppy-save"
+          ></button
+      </div>
+      <!-- Editable table -->
+      <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"
+      ></script>
+      <script src="../js/createSet.js"></script>
+    </div>
+  </body>
+</html>
