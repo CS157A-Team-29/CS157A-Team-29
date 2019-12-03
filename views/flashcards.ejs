@@ -1,9 +1,14 @@
 <% include ./partials/header %>
 <% rows.forEach(function(RowData){ %>
-    <h3>FLASHCARD DATA</h3>
-    <span> <b>cardID</b> is: <%= RowData.cardID %> </span><br>
-    <span> <b>term</b> is:<%=RowData.term%></span><br>
-    <span> <b>definitions</b> is:<%=RowData.definitions%></span><br>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h1><b><%=RowData.term%></b><h1>
+        </div>
+        <div class="flip-card-back">
+          <h1><%=RowData.definitions%></h1>
+        </div>
+      </div>
+    </div>
 <%})%>
-
 <% include ./partials/footer %>
