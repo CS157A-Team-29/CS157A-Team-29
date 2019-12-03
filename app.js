@@ -151,6 +151,28 @@ app.get("/practice-test", function(req, res) {
   });
 });
 
+app.get("/follows", function(req, res) {
+  database.query("SELECT * FROM follows", function(error, result) {
+    if (error) {
+      console.log("Error in query");
+    } else {
+      res.render("flashcards", { rows: result });
+      console.log(result);
+    }
+  });
+});
+
+app.get("/contributes", function(req, res) {
+  database.query("SELECT * FROM contributes", function(error, result) {
+    if (error) {
+      console.log("Error in query");
+    } else {
+      res.render("flashcards", { rows: result });
+      console.log(result);
+    }
+  });
+});
+
 
 let port = 1337;
 app.listen(port, function() {
