@@ -15,7 +15,7 @@ let database = mysql.createConnection({
   host: "localhost",
   user: "root",
   database: "cs157a", // Enter the name of your database
-  password: "testPass" // Enter your password
+  password: "P1p3d-sql" // Enter your password
 });
 
 database.connect(function(error) {
@@ -86,7 +86,7 @@ app.post("/checkIfUsernameValid", function(req, res) {
 
 // Load landing page
 app.get("/landing", function(req, res) {
-  database.query("select * from Accounts", function(error, result) {
+  database.query("SELECT * FROM Accounts", function(error, result) {
     if (error) {
       console.log("Error in query");
     } else {
@@ -97,7 +97,7 @@ app.get("/landing", function(req, res) {
 });
 
 app.get("/accounts", function(req, res) {
-  database.query("select * from Accounts", function(error, result) {
+  database.query("SELECT * FROM Accounts", function(error, result) {
     if (error) {
       console.log("Error in query");
     } else {
@@ -108,7 +108,7 @@ app.get("/accounts", function(req, res) {
 });
 
 app.get("/studyset", function(req, res) {
-  database.query("select * from StudySet", function(error, result) {
+  database.query("SELECT * FROM StudySet", function(error, result) {
     if (error) {
       console.log("Error in query");
     } else {
@@ -119,7 +119,7 @@ app.get("/studyset", function(req, res) {
 });
 
 app.get("/folders", function(req, res) {
-  database.query("select * from Folders", function(error, result) {
+  database.query("SELECT * FROM Folders", function(error, result) {
     if (error) {
       console.log("Error in query");
     } else {
@@ -130,11 +130,22 @@ app.get("/folders", function(req, res) {
 });
 
 app.get("/flashcards", function(req, res) {
-  database.query("select * from Flashcard", function(error, result) {
+  database.query("SELECT * FROM Flashcard", function(error, result) {
     if (error) {
       console.log("Error in query");
     } else {
       res.render("flashcards", { rows: result });
+      console.log(result);
+    }
+  });
+});
+
+app.get("/practice-test", function(req, res) {
+  database.query("SELECT * FROM Flashcard ORDER BY RAND()", function(error, result) {
+    if (error) {
+      console.log("Error in query");
+    } else {
+      res.render("practice", { rows: result });
       console.log(result);
     }
   });
