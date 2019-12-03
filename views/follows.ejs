@@ -1,9 +1,8 @@
 <% include ./partials/header %>
 <% rows.forEach(function(RowData){ %>
-    <h3>FOLDER DATA</h3>
-    <span> <b>title</b> is: <%= RowData.title %> </span><br>
-    <span> <b>folderID</b> is:<%=RowData.folderID%></span><br>
-    <span> <b>Owner</b> is:<%=RowData.owner%></span><br>
+    <h3>FOLLOWING DATA</h3>
+    <span> <b>title</b> is: <%= RowData.username1 %> </span><br>
+    <span> <b>folderID</b> is:<%=RowData.username2%></span><br>
 <%})%>
 
 <% include ./partials/footer %>

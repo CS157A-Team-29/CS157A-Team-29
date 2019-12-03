@@ -156,7 +156,7 @@ app.get("/follows", function(req, res) {
     if (error) {
       console.log("Error in query");
     } else {
-      res.render("flashcards", { rows: result });
+      res.render("follows", { rows: result });
       console.log(result);
     }
   });
@@ -167,7 +167,7 @@ app.get("/contributes", function(req, res) {
     if (error) {
       console.log("Error in query");
     } else {
-      res.render("flashcards", { rows: result });
+      res.render("contributes", { rows: result });
       console.log(result);
     }
   });
