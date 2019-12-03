@@ -1,0 +1,17 @@
+<% include ./partials/header %>
+  <% rows.forEach(function(RowData){ %>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <h1><b><%=RowData.term%></b><h1>
+          </div>
+          <div class="flip-card-back">
+            <h1><%=RowData.definitions%></h1>
+          </div>
+        </div>
+      </div>
+      </div>
+  <%})%>
+
+</div>
+<% include ./partials/footer %>
