@@ -34,7 +34,7 @@ app.get("/", function(req, res) {
 
 // Load login/signup page by default
 app.get("/create", function(req, res) {
-  res.sendFile(path.join(__dirname, "./public/html/createSet.html"));
+  res.render("createSet");
 });
 
 app.post("/createStudySet", function(req, res) {
