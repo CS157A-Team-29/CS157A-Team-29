@@ -37,6 +37,37 @@ app.get("/create", function(req, res) {
   res.sendFile(path.join(__dirname, "./public/html/createSet.html"));
 });
 
+app.post("/createStudySet", function(req, res) {
+  let checkQuery =
+    'SELECT * FROM studyset WHERE setID = "' + req.body.setID + '";';
+
+  database.query(checkQuery, function(error, result) {
+    if (error) {
+      console.log("Error in check studyset query");
+      console.log(error);
+    } else {
+      let query =
+        'INSERT INTO studyset (setID, Title, permissions, owner) VALUES("' +
+        req.body.setID +
+        '","' +
+        req.body.setName +
+        '","' +
+        "public" +
+        '","' +
+        "aaronsmith" +
+        '");';
+      database.query(query, function(error, result) {
+        if (error) {
+          console.log("Error in insert create query");
+          console.log(error);
+        } else {
+          res.send("valid");
+        }
+      });
+    }
+  });
+});
+
 // Login to the platform. Check database for valid username and password.
 app.post("/login", function(req, res) {
   let query =
@@ -157,7 +188,10 @@ app.get("/flashcards", function(req, res) {
 });
 
 app.get("/practice-test", function(req, res) {
-  database.query("SELECT * FROM Flashcard ORDER BY RAND()", function(error, result) {
+  database.query("SELECT * FROM Flashcard ORDER BY RAND()", function(
+    error,
+    result
+  ) {
     if (error) {
       console.log("Error in query");
     } else {

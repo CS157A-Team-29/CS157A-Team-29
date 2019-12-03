@@ -31,6 +31,44 @@ $tableID.on("click", ".table-remove", function() {
     .detach();
 });
 
+var dataArray = [];
+
+$(".save-data").on("click", () => {
+  dataArray = [];
+  $("table#termsDefs tr").each(function() {
+    var arrayOfThisRow = [];
+    var tableData = $(this).find("td");
+    console.log(tableData);
+
+    if (tableData.length > 0) {
+      tableData.each(function() {
+        arrayOfThisRow.push($(this).text());
+      });
+      // Remove Trash icon
+      arrayOfThisRow.pop();
+      dataArray.push(arrayOfThisRow);
+    }
+  });
+  // Remove empty data row
+  dataArray.pop();
+  alert(dataArray); // alerts the entire array
+  console.log(dataArray);
+
+  let nameSet = document.getElementById("studySetName").value;
+  console.log(nameSet);
+
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "/createStudySet");
+  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  let studySetData = {
+    setID: Math.round(Math.random() * 10000),
+    setName: nameSet,
+    data: dataArray
+  };
+  console.log(studySetData);
+  xhr.send(JSON.stringify(studySetData));
+});
+
 // A few jQuery helpers for exporting only
 jQuery.fn.pop = [].pop;
 jQuery.fn.shift = [].shift;

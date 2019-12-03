@@ -18,10 +18,14 @@
         >
           New Study Set
         </h3>
+        <div id="tableName">
+          Name: <input type="text" id="studySetName">
+        </div>
         <div class="card-body">
           <div id="table" class="table-editable">
             <table
-              class="table table-bordered table-responsive-md table-striped text-center"
+              id="termsDefs"
+            class="table table-bordered table-responsive-md table-striped text-center"
             >
               <thead>
                 <tr>
@@ -122,6 +126,11 @@
           ><a href="#!" class="text-success"
             ><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a
         ></span>
+        <span class="save-data"
+          ><button
+            type="button"
+            class="btn btn-primary btn-rounded btn-sm my-0 glyphicon glyphicon-floppy-save"
+          ></button
       </div>
       <!-- Editable table -->
       <script
