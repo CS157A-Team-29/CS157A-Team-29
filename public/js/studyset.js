@@ -14,11 +14,12 @@ function goToFolderPage(studysetName) {
   xhr.onload = function() {
 	response = JSON.parse(xhr.response);
 
-	for (let i = 0; i < studysetTexts.length; i++) {
-	  $("span").each(function () {
-        $(this).remove();
-      });
-	}
+	$("span").each(function () {
+	  $(this).remove();
+	});
+	$("br").each(function () {
+	  $(this).remove();
+	});
 
 	let backButton = document.createElement("input");
 	backButton.type = "button";

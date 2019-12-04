@@ -2,23 +2,24 @@
 let accountsTexts = document.getElementsByClassName("accountText");
 
 function goToAccountPage(username) {
-  let xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://localhost:1337/account");
-  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  let xhr1 = new XMLHttpRequest();
+  xhr1.open("POST", "http://localhost:1337/account");
+  xhr1.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   let credentials = {
     username: username,
   }
   console.log(credentials);
-  xhr.send(JSON.stringify(credentials));
+  xhr1.send(JSON.stringify(credentials));
 
-  xhr.responseType = "text";
-  xhr.onload = function() {
-	response = JSON.parse(xhr.response);
-	for (let i = 0; i < accountsTexts.length; i++) {
-	  $("span").each(function () {
-        $(this).remove();
-      });
-	}
+  xhr1.responseType = "text";
+  xhr1.onload = function() {
+	response = JSON.parse(xhr1.response);
+	$("span").each(function () {
+	  $(this).remove();
+	});
+	$("br").each(function () {
+	  $(this).remove();
+	});
 	let backButton = document.createElement("input");
 	backButton.type = "button";
 	backButton.value = "back to accounts";
@@ -26,6 +27,63 @@ function goToAccountPage(username) {
 	  window.location.href = "http://localhost:1337/accounts";
 	});
 	document.getElementById("container").prepend(backButton);
+
+
+	let xhr2 = new XMLHttpRequest();
+	xhr2.open("POST", "http://localhost:1337/isfollowing");
+	xhr2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	let credentials = {
+	  username: username,
+	}
+	xhr2.send(JSON.stringify(credentials));
+
+	xhr2.responseType = "text";
+	xhr2.onload = function() {
+	  if (xhr2.response === "no") {
+  	    let followButton = document.createElement("input");
+  		followButton.type = "button";
+  		followButton.value = "follow " + username;
+  		followButton.addEventListener('click', function() {
+  		  let xhr3 = new XMLHttpRequest();
+  	  	  xhr3.open("POST", "http://localhost:1337/followaccount");
+  	  	  xhr3.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  	  	  let credentials = {
+  	  	    username: username,
+  	  	  }
+  	  	  xhr3.send(JSON.stringify(credentials));
+
+  	  	  xhr3.responseType = "text";
+  	  	  xhr3.onload = function() {
+  			if (xhr3.response === "done") {
+  			  document.getElementById("container").removeChild(followButton);
+  			}
+  		  };
+  		});
+  		document.getElementById("container").append(followButton);
+	  } else if (xhr2.response === "yes") {
+      	let unfollowButton = document.createElement("input");
+      	unfollowButton.type = "button";
+      	unfollowButton.value = "unfollow " + username;
+      	unfollowButton.addEventListener('click', function() {
+      	  let xhr3 = new XMLHttpRequest();
+      	  xhr3.open("POST", "http://localhost:1337/unfollowaccount");
+      	  xhr3.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      	  let credentials = {
+      	  	 username: username,
+      	  }
+      	  xhr3.send(JSON.stringify(credentials));
+
+      	  xhr3.responseType = "text";
+      	  xhr3.onload = function() {
+      	    if (xhr3.response === "done") {
+      		  document.getElementById("container").removeChild(unfollowButton);
+      	    }
+          };
+      	});
+        document.getElementById("container").append(unfollowButton);
+
+	  }
+	};
 
 	for (let i = 0; i < response[3].length; i++) {
 	  let text = document.createElement("p");
@@ -46,10 +104,21 @@ function goToAccountPage(username) {
 	document.getElementById("container").prepend(follows);
 
 	for (let i = 0; i < response[2].length; i++) {
+	  let anchor = document.createElement("a");
+	  anchor.href = "#";
 	  let text = document.createElement("p");
 	  let pretext = response[2][i].type;
+	  anchor.append(text);
   	  text.innerHTML = pretext + ": " + response[2][i].title;
-  	  document.getElementById("container").prepend(text);
+  	  document.getElementById("container").prepend(anchor);
+	  anchor.addEventListener('click', function() {
+		if (response[2][i].type === "folder") {
+		  window.location.href = "http://localhost:1337/folders";
+	    } else if (response[2][i].type === "studyset") {
+		  window.location.href = "http://localhost:1337/studyset";
+	    }
+		// TODO make page redirect to the exact studyset/folder
+	  });
 	}
 
 	let stars = document.createElement("h3");
@@ -57,9 +126,20 @@ function goToAccountPage(username) {
 	document.getElementById("container").prepend(stars);
 
 	for (let i = 0; i < response[1].length; i++) {
+	  let anchor = document.createElement("a");
+  	  anchor.href = "#";
 	  let text = document.createElement("p");
   	  text.innerHTML = "studyset: " + response[1][i].Title;
-  	  document.getElementById("container").prepend(text);
+	  anchor.append(text);
+  	  document.getElementById("container").prepend(anchor);
+	  anchor.addEventListener('click', function() {
+		if (response[1][i].type === "folder") {
+		  window.location.href = "http://localhost:1337/folders";
+	    } else if (response[1][i].type === "studyset") {
+		  window.location.href = "http://localhost:1337/studyset";
+	    }
+		// TODO make page redirect to the exact studyset/folder
+	  });
 	}
 
 	let contribuesTo = document.createElement("h3");
@@ -67,10 +147,21 @@ function goToAccountPage(username) {
 	document.getElementById("container").prepend(contribuesTo);
 
 	for (let i = 0; i < response[0].length; i++) {
+	  let anchor = document.createElement("a");
+	  anchor.href = "#";
 	  let text = document.createElement("p");
 	  let pretext = response[0][i].type;
   	  text.innerHTML = pretext + ": " + response[0][i].title;
-  	  document.getElementById("container").prepend(text);
+	  anchor.append(text);
+  	  document.getElementById("container").prepend(anchor);
+	  anchor.addEventListener('click', function() {
+		if (response[0][i].type === "folder") {
+		  window.location.href = "http://localhost:1337/folders";
+	    } else if (response[0][i].type === "studyset") {
+		  window.location.href = "http://localhost:1337/studyset";
+	    }
+		// TODO make page redirect to the exact studyset/folder
+	  });
 	}
 
 	let accountOwns = document.createElement("h3");

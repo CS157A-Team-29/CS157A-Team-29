@@ -55,7 +55,7 @@ app.post("/createStudySet", function(req, res) {
         '","' +
         "public" +
         '","' +
-        "aaronsmith" +
+        currentuser +
         '");';
       database.query(query, function(error, result) {
         if (error) {
@@ -177,7 +177,6 @@ app.post("/account", function(req, res) {
 				  console.log(error);
 			    } else {
 				  finalResult.push(result4);
-				  console.log(finalResult);
 				  res.send(JSON.stringify(finalResult));
 			    }
 			  });
@@ -221,11 +220,54 @@ app.get("/landing", function(req, res) {
 });
 
 app.get("/accounts", function(req, res) {
-  database.query("SELECT * FROM Accounts", function(error, result) {
+  database.query(`SELECT * FROM Accounts WHERE username != "` + currentuser + `";`, function(error, result) {
     if (error) {
-      console.log("Error in query");
+      console.log("Error in accounts query");
     } else {
       res.render("accounts", { rows: result });
+    }
+  });
+});
+
+// for following an account
+app.post("/isfollowing", function(req, res) {
+  let query = `SELECT * FROM follows WHERE username1 = "` + currentuser + `" AND username2 = "` + req.body.username + `";`;
+  database.query(query, function(error, result) {
+    if (error) {
+      console.log("Error in isfollowing query");
+    } else {
+	  if (result.length === 1) {
+		res.send("yes");
+	  } else {
+		res.send("no");
+	}
+
+    }
+  });
+});
+
+// for following an account
+app.post("/followaccount", function(req, res) {
+  let query = `INSERT INTO follows (username1, username2) VALUES("` + currentuser + `","` + req.body.username + `");`;
+  database.query(query, function(error, result) {
+    if (error) {
+      console.log("Error in followaccount query");
+    } else {
+	  console.log(currentuser + " is now following " + req.body.username);
+      res.send("done");
+    }
+  });
+});
+
+// for unfollowing an account
+app.post("/unfollowaccount", function(req, res) {
+  let query = `DELETE FROM follows WHERE username1 = "` + currentuser + `" AND username2 = "` + req.body.username + `";`;
+  database.query(query, function(error, result) {
+    if (error) {
+      console.log("Error in unfollowaccount query");
+    } else {
+	  console.log(currentuser + " is no longer following " + req.body.username);
+      res.send("done");
     }
   });
 });
