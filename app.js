@@ -4,6 +4,7 @@ let path = require("path");
 let bodyParser = require("body-parser"); // body-parser for handling post requests
 let passwordHash = require("password-hash"); // Don't store plaintext passwords in database. Though we are sending plaintext passwords over http...
 let app = express();
+let currentuser = "aaronsmith"; // default user
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -83,6 +84,7 @@ app.post("/login", function(req, res) {
       ) {
         // If this is true, then our query returned a row in the database, i.e. the username/password combination is correct.
         console.log("Logging in as " + req.body.username);
+		currentuser = req.body.username;
         res.send("valid");
       } else {
         // Else username/password combination not in the database.
@@ -115,13 +117,16 @@ app.post("/signup", function(req, res) {
 // View an individual account
 app.post("/account", function(req, res) {
   console.log(req.body.username);
-  let query = 'SELECT Title FROM studyset WHERE owner = "' + req.body.username + '";';
+  let query = `SELECT title, 'studyset' as type FROM studyset WHERE owner = "` + req.body.username
+  			+ `" UNION SELECT title, 'folder' as type FROM folders WHERE owner = "` + req.body.username + `";`;
+  console.log(query);
   let finalResult = [];
   database.query(query, function(error, result1) {
     if (error) {
       console.log("Error in account query id 1");
       console.log(error);
     } else {
+	  console.log(result1);
 	  finalResult.push(result1);
 	  let query = 'SELECT Title FROM studyset, contributes WHERE contributes.setID = studyset.setID AND username = "' + req.body.username + '";';
 	  database.query(query, function(error, result2) {
@@ -130,7 +135,8 @@ app.post("/account", function(req, res) {
 		  console.log(error);
 	    } else {
 		  finalResult.push(result2);
-		  let query = 'SELECT Title FROM studyset, starsstudyset WHERE starsstudyset.setid = studyset.setid AND username = "' + req.body.username + '";';
+		  let query = `SELECT title, 'studyset' as type FROM studyset, starsstudyset WHERE studyset.setid = starsstudyset.setid AND username = "` + req.body.username
+		  			+ `" UNION SELECT title, 'folder' as type FROM folders, starsfolders WHERE folders.folderid = starsfolders.folderid AND username = "` + req.body.username + `";`;
 		  database.query(query, function(error, result3) {
 			if (error) {
 			  console.log("Error in account query id 3");
@@ -244,27 +250,12 @@ app.get("/practice-test", function(req, res) {
   });
 });
 
-app.get("/follows", function(req, res) {
-  database.query("SELECT * FROM follows", function(error, result) {
-    if (error) {
-      console.log("Error in query");
-    } else {
-      res.render("follows", { rows: result });
-      console.log(result);
-    }
-  });
+app.get("/myaccount", function(req, res) {
+  res.render("myaccount", { username: currentuser });
 });
 
-app.get("/contributes", function(req, res) {
-  database.query("SELECT * FROM contributes", function(error, result) {
-    if (error) {
-      console.log("Error in query");
-    } else {
-      res.render("contributes", { rows: result });
-      console.log(result);
-    }
-  });
-});
+
+
 
 let port = 1337;
 app.listen(port, function() {

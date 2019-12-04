@@ -1,7 +1,4 @@
 <% include ./partials/header %>
-<% rows.forEach(function(RowData){ %>
-    <span> <b>User: </b><a href="#" class="accountText" id=<%= RowData.username %>><%= RowData.username %></a> </span><br>
-<%})%>
 
 <html>
   <head>
@@ -11,7 +8,11 @@
   </head>
 
   <body>
-
+    <div id="container">
+	  <% rows.forEach(function(RowData){ %>
+  	    <span> <b>User: </b><a href="#" class="accountText" id=<%= RowData.username %>><%= RowData.username %></a> </span><br>
+  	  <%})%>
+	</div>
 
     <script src="../js/accounts.js"></script>
   </body>

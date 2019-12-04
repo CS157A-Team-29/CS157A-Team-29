@@ -12,6 +12,7 @@ function logIn() {
   let xhr = new XMLHttpRequest();
   xhr.open("POST", "http://localhost:1337/login");
   xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  let userName = docElements.username.value;
   let credentials = {
     username: docElements.username.value,
 	password: docElements.password.value
