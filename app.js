@@ -15,7 +15,7 @@ let database = mysql.createConnection({
   host: "localhost",
   user: "root",
   database: "cs157a", // Enter the name of your database
-  password: "M0hiuddin" // Enter your password
+  password: "MyNewPass" // Enter your password
 });
 
 database.connect(function(error) {
@@ -112,6 +112,50 @@ app.post("/signup", function(req, res) {
   });
 });
 
+// View an individual account
+app.post("/account", function(req, res) {
+  console.log(req.body.username);
+  let query = 'SELECT Title FROM studyset WHERE owner = "' + req.body.username + '";';
+  let finalResult = [];
+  database.query(query, function(error, result1) {
+    if (error) {
+      console.log("Error in account query id 1");
+      console.log(error);
+    } else {
+	  finalResult.push(result1);
+	  let query = 'SELECT Title FROM studyset, contributes WHERE contributes.setID = studyset.setID AND username = "' + req.body.username + '";';
+	  database.query(query, function(error, result2) {
+		if (error) {
+		  console.log("Error in account query id 2");
+		  console.log(error);
+	    } else {
+		  finalResult.push(result2);
+		  let query = 'SELECT Title FROM studyset, starsstudyset WHERE starsstudyset.setid = studyset.setid AND username = "' + req.body.username + '";';
+		  database.query(query, function(error, result3) {
+			if (error) {
+			  console.log("Error in account query id 3");
+			  console.log(error);
+		    } else {
+			  finalResult.push(result3);
+			  let query = 'SELECT username2 FROM follows WHERE username1 = "' + req.body.username + '";';
+			  database.query(query, function(error, result4) {
+				if (error) {
+				  console.log("Error in account query id 4");
+				  console.log(error);
+			    } else {
+				  finalResult.push(result4);
+				  console.log(finalResult);
+				  res.send(JSON.stringify(finalResult));
+			    }
+			  });
+		    }
+		  });
+	    }
+	  });
+    }
+  });
+});
+
 // Checks if the username is in the database. If it isn't, returns "valid" to the client.
 app.post("/checkIfUsernameValid", function(req, res) {
   let query =
@@ -149,7 +193,6 @@ app.get("/accounts", function(req, res) {
       console.log("Error in query");
     } else {
       res.render("accounts", { rows: result });
-      console.log(result);
     }
   });
 });

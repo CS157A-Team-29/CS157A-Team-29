@@ -1,9 +1,20 @@
 <% include ./partials/header %>
 <% rows.forEach(function(RowData){ %>
-    <h3>ACCOUNT DATA</h3>
-    <span> <b>Username</b> is: <%= RowData.username %> </span><br>
-    <span> <b>Email</b> is:<%=RowData.email%></span><br>
-    <span> <b>Password</b> is:<%=RowData.password%></span><br>
+    <span> <b>User: </b><a href="#" class="accountText" id=<%= RowData.username %>><%= RowData.username %></a> </span><br>
 <%})%>
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/accounts.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <title>Accouts</title>
+  </head>
+
+  <body>
+
+
+    <script src="../js/accounts.js"></script>
+  </body>
+</html>
 
 <% include ./partials/footer %>
