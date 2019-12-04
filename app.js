@@ -114,6 +114,21 @@ app.post("/signup", function(req, res) {
   });
 });
 
+// View folder details
+app.post("/folderdata", function(req, res) {
+  console.log("Fetching folder data for: " + req.body.foldername);
+  let query = `SELECT title, owner FROM studyset, contains WHERE contains.setID = studyset.setID AND contains.folderid = `
+  			+ `(SELECT folderID FROM folders WHERE title = "` + req.body.foldername + `");`;
+  database.query(query, function(error, result) {
+    if (error) {
+      console.log("Error in folder query");
+      console.log(error);
+    } else {
+      res.send(JSON.stringify(result));
+	}
+  });
+});
+
 // View an individual account
 app.post("/account", function(req, res) {
   console.log("Fetching account data for: " + req.body.username);
@@ -218,7 +233,6 @@ app.get("/folders", function(req, res) {
       console.log("Error in query");
     } else {
       res.render("folders", { rows: result });
-      console.log(result);
     }
   });
 });

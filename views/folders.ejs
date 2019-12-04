@@ -1,9 +1,21 @@
 <% include ./partials/header %>
-<% rows.forEach(function(RowData){ %>
-    <h3>FOLDER DATA</h3>
-    <span> <b>title</b> is: <%= RowData.title %> </span><br>
-    <span> <b>folderID</b> is:<%=RowData.folderID%></span><br>
-    <span> <b>Owner</b> is:<%=RowData.owner%></span><br>
-<%})%>
- 
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/accounts.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <title>Folders</title>
+  </head>
+
+  <body>
+    <div id="container">
+	  <% rows.forEach(function(RowData){ %>
+  	    <span> <b>folder: </b><a href="#" class="folderText" id=<%= RowData.title %>><%= RowData.title %></a></span><br>
+  	  <%})%>
+	</div>
+
+    <script src="../js/folders.js"></script>
+  </body>
+</html>
+
 <% include ./partials/footer %>
