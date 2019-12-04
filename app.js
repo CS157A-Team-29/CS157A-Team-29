@@ -114,6 +114,20 @@ app.post("/signup", function(req, res) {
   });
 });
 
+// View studysetdata
+app.post("/studysetdata", function(req, res) {
+	console.log("Fetching study set data for: " + req.body.studysetName);
+  let query = `SELECT * FROM studyset WHERE Title = "` + req.body.studysetName + `";`;
+  database.query(query, function(error, result) {
+    if (error) {
+      console.log("Error in studyset query");
+      console.log(error);
+    } else {
+      res.send(JSON.stringify(result));
+    }
+  });
+});
+
 // View folder details
 app.post("/folderdata", function(req, res) {
   console.log("Fetching folder data for: " + req.body.foldername);
@@ -222,7 +236,6 @@ app.get("/studyset", function(req, res) {
       console.log("Error in query");
     } else {
       res.render("study-set", { rows: result });
-      console.log(result);
     }
   });
 });

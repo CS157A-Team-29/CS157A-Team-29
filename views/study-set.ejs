@@ -1,10 +1,22 @@
 <% include ./partials/header %>
-<% rows.forEach(function(RowData){ %>
-    <h3>STUDYSET DATA</h3>
-    <span> <b>SetID</b> is: <%= RowData.setID %> </span><br>
-    <span> <b>Owner</b> is:<%=RowData.owner%></span><br>
-    <span> <b>Permissions</b> is:<%=RowData.permissions%></span><br>
-    <span> <b>Title</b> is:<%=RowData.Title%></span><br>
-<%})%>
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/accounts.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <title>Folders</title>
+  </head>
+
+  <body>
+    <div id="container">
+	  <% rows.forEach(function(RowData){ %>
+  	    <span> <b>studyset: </b><a href="#" class="studysetText" id="<%= RowData.Title %>"><%= RowData.Title %></a></span><br>
+  	  <%})%>
+
+	</div>
+
+    <script src="../js/studyset.js"></script>
+  </body>
+</html>
 
 <% include ./partials/footer %>
