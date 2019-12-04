@@ -1,4 +1,19 @@
 <% include ./partials/header %>
-<h2> Logged in as: <%= username %></h2>
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/accounts.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <title>My Account</title>
+  </head>
+
+  <body>
+    <div id="container">
+	  <h2 class="accountusername" id=<%= username %>> Logged in as: <%= username %></h2>
+	</div>
+
+    <script src="../js/myaccount.js"></script>
+  </body>
+</html>
 
 <% include ./partials/footer %>

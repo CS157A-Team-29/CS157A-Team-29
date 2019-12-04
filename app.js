@@ -116,17 +116,15 @@ app.post("/signup", function(req, res) {
 
 // View an individual account
 app.post("/account", function(req, res) {
-  console.log(req.body.username);
+  console.log("Fetching account data for: " + req.body.username);
   let query = `SELECT title, 'studyset' as type FROM studyset WHERE owner = "` + req.body.username
   			+ `" UNION SELECT title, 'folder' as type FROM folders WHERE owner = "` + req.body.username + `";`;
-  console.log(query);
   let finalResult = [];
   database.query(query, function(error, result1) {
     if (error) {
       console.log("Error in account query id 1");
       console.log(error);
     } else {
-	  console.log(result1);
 	  finalResult.push(result1);
 	  let query = 'SELECT Title FROM studyset, contributes WHERE contributes.setID = studyset.setID AND username = "' + req.body.username + '";';
 	  database.query(query, function(error, result2) {
@@ -251,10 +249,8 @@ app.get("/practice-test", function(req, res) {
 });
 
 app.get("/myaccount", function(req, res) {
-  res.render("myaccount", { username: currentuser });
+  res.render("myaccount", {username: currentuser} );
 });
-
-
 
 
 let port = 1337;
