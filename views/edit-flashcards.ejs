@@ -1,0 +1,67 @@
+<% include ./partials/header %>
+<table style="width:100%">
+  <tr>
+    <th>Card ID</th>
+    <th>Term</th>
+    <th>Definition</th>
+  </tr>
+    <% rows.forEach(function(RowData){ %>
+      <tr>
+        <th><%=RowData.cardID%></th>
+        <th><%=RowData.term%></th>
+        <th><%=RowData.definitions%></th>
+      </tr>
+    <%})%>
+</table>
+
+<div class="row">
+    <div class="col-md-3">
+        <form action="/add-card" method="POST">
+          <legend>Add new card</legend>
+          <div class="form-group">
+            <input name="cardTerm" value="" placeholder="Card Term" id="cardTerm" autofocus="autofocus" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <input name="cardDefinition" value="" placeholder="Card Definition" id="cardDefinition" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Add Card</button>
+          </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <form action="/edit-card" method="POST">
+          <legend>Edit existing card</legend>
+          <div class="form-group">
+            <input name="cardID" value="" placeholder="Card ID" id="cardID" autofocus="autofocus" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <input name="cardTerm" value="" placeholder="Card Term" id="cardTerm" autofocus="autofocus" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <input name="cardDefinition" value="" placeholder="Card Definition" id="cardDefinition" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Update Card</button>
+          </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <form action="/del-card" method="POST">
+          <legend>Delete card</legend>
+          <div class="form-group">
+            <input name="cardID" value="" placeholder="Card ID" id="cardID" autofocus="autofocus" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Delete Card</button>
+          </div>
+        </form>
+    </div>
+</div>
+<% include ./partials/footer %>

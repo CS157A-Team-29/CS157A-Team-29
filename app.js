@@ -12,11 +12,12 @@ app.use("/public/images/", express.static("./public/images"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
 let database = mysql.createConnection({
   host: "localhost",
   user: "root",
   database: "cs157a", // Enter the name of your database
-  password: "MyNewPass" // Enter your password
+  password: "P1p3d-sql" // Enter your password
 });
 
 database.connect(function(error) {
@@ -303,6 +304,54 @@ app.get("/flashcards", function(req, res) {
     }
   });
 });
+app.get("/edit-flashcards", function(req, res) {
+  database.query("SELECT * FROM Flashcard", function(error, result) {
+    if (error) {
+      console.log("Error in query");
+    } else {
+      res.render("edit-flashcards", { rows: result });
+      console.log(result);
+    }
+  });
+});
+
+app.post("/add-card", function(req, res) {
+  let query = `INSERT INTO flashcard (term, definitions) VALUES("` + req.body.cardTerm + `","` + req.body.cardDefinition + `");`;
+  database.query(query, function(error, result) {
+    if (error) {
+      console.log(error);
+    } else {
+	  console.log("card ID was added");
+      res.redirect("/edit-flashcards")
+    }
+  });
+});
+
+app.post("/edit-card", function(req, res) {
+  console.log(req.body.cardID);
+  let query = `UPDATE FROM Flashcard SET term="` +req.body.cardTerm+`" ,definitions= "`+req.body.cardDefinition+`" WHERE cardID = "` + req.body.cardID + `";`;
+  database.query(query, function(error, result) {
+    if (error) {
+      console.log(error);
+    } else {
+	  console.log("card ID was updated");
+      res.redirect("/edit-flashcards")
+    }
+  });
+});
+
+app.post("/del-card", function(req, res) {
+  console.log(req.body.cardID);
+  let query = `DELETE FROM Flashcard WHERE cardID = "` + req.body.cardID + `";`;
+  database.query(query, function(error, result) {
+    if (error) {
+      console.log(error);
+    } else {
+	  console.log("card ID of: " +req.body.cardID+" was deleted");
+      res.redirect("/edit-flashcards")
+    }
+  });
+});
 
 app.get("/practice-test", function(req, res) {
   database.query("SELECT * FROM Flashcard ORDER BY RAND()", function(
@@ -317,6 +366,8 @@ app.get("/practice-test", function(req, res) {
     }
   });
 });
+
+
 
 app.get("/myaccount", function(req, res) {
   res.render("myaccount", {username: currentuser} );
