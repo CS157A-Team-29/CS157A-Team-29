@@ -17,7 +17,7 @@ let database = mysql.createConnection({
   host: "localhost",
   user: "root",
   database: "cs157a", // Enter the name of your database
-  password: "P1p3d-sql" // Enter your password
+  password: "MyNewPass" // Enter your password
 });
 
 database.connect(function(error) {
@@ -329,7 +329,7 @@ app.post("/add-card", function(req, res) {
 
 app.post("/edit-card", function(req, res) {
   console.log(req.body.cardID);
-  let query = `UPDATE FROM Flashcard SET term="` +req.body.cardTerm+`" ,definitions= "`+req.body.cardDefinition+`" WHERE cardID = "` + req.body.cardID + `";`;
+  let query = `UPDATE Flashcard SET term="` +req.body.cardTerm+`" ,definitions= "`+req.body.cardDefinition+`" WHERE cardID = "` + req.body.cardID + `";`;
   database.query(query, function(error, result) {
     if (error) {
       console.log(error);
