@@ -12,10 +12,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let database = mysql.createConnection({
-  host: "localhost",
+  host: "localhost",-
   user: "root",
   database: "cs157a", // Enter the name of your database
-  password: "M0hiuddin" // Enter your password
+  password: "P1p3d-sql" // Enter your password
 });
 
 database.connect(function(error) {
@@ -188,10 +188,7 @@ app.get("/flashcards", function(req, res) {
 });
 
 app.get("/practice-test", function(req, res) {
-  database.query("SELECT * FROM Flashcard ORDER BY RAND()", function(
-    error,
-    result
-  ) {
+  database.query("SELECT * FROM Flashcard ORDER BY RAND()", function(error,result) {
     if (error) {
       console.log("Error in query");
     } else {
