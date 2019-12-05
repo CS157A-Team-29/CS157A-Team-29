@@ -177,6 +177,7 @@ app.post("/account", function(req, res) {
 				  console.log(error);
 			    } else {
 				  finalResult.push(result4);
+				  console.log(finalResult);
 				  res.send(JSON.stringify(finalResult));
 			    }
 			  });

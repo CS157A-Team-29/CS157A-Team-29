@@ -25,7 +25,8 @@ for (let i = 0; i < response[3].length; i++) {
   anchor.href = "#";
   anchor.addEventListener('click', function() {
 	document.getElementById("container").innerHTML = "";
-	    goToAccountPage(response[3][i].username2);
+	    //goToAccountPage(response[3][i].username2);
+		window.location.href = "http://localhost:1337/accounts";
 	  });
   text.appendChild(anchor);
 	  document.getElementById("container").after(topElement, text);

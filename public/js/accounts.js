@@ -103,6 +103,7 @@ function goToAccountPage(username) {
 	follows.innerHTML = "Follows: ";
 	document.getElementById("container").prepend(follows);
 
+	//stars
 	for (let i = 0; i < response[2].length; i++) {
 	  let anchor = document.createElement("a");
 	  anchor.href = "#";
@@ -125,6 +126,7 @@ function goToAccountPage(username) {
 	stars.innerHTML = "Stars: ";
 	document.getElementById("container").prepend(stars);
 
+	//contributes (only studysets, not folders)
 	for (let i = 0; i < response[1].length; i++) {
 	  let anchor = document.createElement("a");
   	  anchor.href = "#";
@@ -133,11 +135,7 @@ function goToAccountPage(username) {
 	  anchor.append(text);
   	  document.getElementById("container").prepend(anchor);
 	  anchor.addEventListener('click', function() {
-		if (response[1][i].type === "folder") {
-		  window.location.href = "http://localhost:1337/folders";
-	    } else if (response[1][i].type === "studyset") {
-		  window.location.href = "http://localhost:1337/studyset";
-	    }
+		window.location.href = "http://localhost:1337/studyset";
 		// TODO make page redirect to the exact studyset/folder
 	  });
 	}
@@ -146,6 +144,7 @@ function goToAccountPage(username) {
 	contribuesTo.innerHTML = "Contributes to: ";
 	document.getElementById("container").prepend(contribuesTo);
 
+	//owns
 	for (let i = 0; i < response[0].length; i++) {
 	  let anchor = document.createElement("a");
 	  anchor.href = "#";
