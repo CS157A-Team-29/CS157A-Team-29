@@ -4,18 +4,15 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../stylesheets/accounts.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <title>Folders</title>
+    <title>My Account</title>
   </head>
 
   <body>
     <div id="container">
-	  <% rows.forEach(function(RowData){ %>
-  	    <span> <b>studyset: </b><a href="#" class="studysetText" id="<%= RowData.Title %>"><%= RowData.Title %></a></span><br>
-  	  <%})%>
-
+	  <h2 class="accountusername" id="<%= username %>"> Logged in as: <%= username %></h2>
 	</div>
 
-    <script src="../js/studyset.js"></script>
+    <script src="../js/myaccount.js"></script>
   </body>
 </html>
 
